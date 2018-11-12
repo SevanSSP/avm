@@ -18,6 +18,7 @@ pip install --extra-index-url  https://api.python-private-package-index.com/EYvh
 **Note that the PyPri account is not yet active and the package is therefore not available for download.**
 
 ## Usage
+### Import package
 Import *avm* and start using it.
 
 ```python
@@ -37,6 +38,31 @@ Get the executable path of the 'wadam' application. Default version.
 ```python
 path = get_exe_path('wadam', version='9.4.3')
 ```  
+
+### Console entry point
+List details about the applications and versions registered in Application Version Manager.
+
+Only default application versions.
+
+```bash
+avm-list
+```
+
+All versions
+
+Only default application versions.
+
+```bash
+avm-list --all-versions
+```
+
+Toggle logger level so that debug-level info is piped to console.
+
+Only default application versions
+
+```bash
+avm-list --all-versions --logging-level debug
+```
 
 ## Documentation
 No documentation yet. Sorry!
