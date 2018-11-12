@@ -101,8 +101,20 @@ def get_registered_applications():
         for version in versions:
             vnumber = version.getAttribute('VersionNumber').lower() # lowercase for increased robustness
             exepath = version.getAttribute('ExeFilePath')
+            installdir = version.getAttribute('InstallDir')
+            platform = version.getAttribute('Platform')
+            producttype = version.getAttribute('ProductType')
+            category  = version.getAttribute('Category')
             isdefault = True if version.getAttribute('IsDefault').lower() == 'true' else False
-            appdata[vnumber] = OrderedDict(versionnumber=vnumber, exepath=exepath, default=isdefault)
+            appdata[vnumber] = OrderedDict(
+                versionnumber=vnumber,
+                exepath=exepath,
+                default=isdefault,
+                installdir=installdir,
+                platform=platform,
+                producttype=producttype,
+                category=category
+            )
             logger.debug(f"Application '{appname}' - version '{vnumber}'- is default {isdefault}")
 
         # add application data dict
@@ -110,37 +122,4 @@ def get_registered_applications():
 
     return data
 
-
-def list_applications():
-    """
-    Get all applications registered in Application Version Manager
-    """
-    # todo: argparser
-    # todo: get application details
-    # todo implement logger and pipe it to standard out
-    # todo: format output
-
-    # import logging
-    # import sys
-    #
-    # root = logging.getLogger()
-    # root.setLevel(logging.DEBUG)
-    #
-    # handler = logging.StreamHandler(sys.stdout)
-    # handler.setLevel(logging.DEBUG)
-    # formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-    # handler.setFormatter(formatter)
-    # root.addHandler(handler)
-    pass
-
-
-def get_application_path():
-    """
-    Get path to application executable
-    """
-    # todo: argparser
-    # todo: get application path
-    # todo implement logger and pipe it to standard out
-    # todo: format output
-    pass
 
