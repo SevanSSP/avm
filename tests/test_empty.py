@@ -1,5 +1,4 @@
 import unittest
-import avm
 
 
 class FirstTestCase(unittest.TestCase):
