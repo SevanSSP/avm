@@ -19,8 +19,7 @@ setup(
     long_description=read('README.md'),
     entry_points={
             'console_scripts': [
-                'avm-list = avm.avm:list_applications',
-                'avm-get-exe = avm.avm:get_application_path'
+                'avm-list = avm.entry_points:list_applications',
             ],
         },
 )
