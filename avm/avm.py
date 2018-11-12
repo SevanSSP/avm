@@ -11,7 +11,11 @@ from collections import OrderedDict
 logger = logging.getLogger(__name__)
 
 # path to applicationversionmanager xml
-APPVERXML = os.path.join(os.getenv('appdata'), 'DNVGL', 'ApplicationVersionManager', 'ApplicationVersions.xml')
+try:
+    APPVERXML = os.path.join(os.getenv('appdata'), 'DNVGL', 'ApplicationVersionManager', 'ApplicationVersions.xml')
+except TypeError:
+    logger.error("Failed to locate 'ApplicationVersions.xml'. No environmental variable called 'APPDATA'.")
+    APPVERXML = None
 
 
 def get_exe_path(appname, version=None):
@@ -38,12 +42,16 @@ def get_exe_path(appname, version=None):
 
     """
     # all registered applications
-    appdata = get_registered_applications()
+    try:
+        appdata = get_registered_applications()
+    except FileNotFoundError:
+        logger.error(f"Failed to load application version data", exc_info=True)
+        raise
 
+    # get app data
     app = appdata.get(appname.lower())
-
     if app is None:
-        logger.error(f"Application '{appname}' is not registered in Application Version Manager.", exc_info=True)
+        logger.warning(f"Application '{appname}' is not registered in Application Version Manager.", exc_info=True)
         return None
 
     if version is not None:
@@ -51,8 +59,8 @@ def get_exe_path(appname, version=None):
         try:
             appversion = app.get(version.lower())
         except KeyError:
-            logger.error(f"Version '{version}' of application '{appname}' is not registered in Application "
-                         f"Version Manager.", exc_info=True)
+            logger.warning(f"Version '{version}' of application '{appname}' is not registered in Application "
+                           f"Version Manager.")
             return None
         else:
             path = appversion.get('exepath')
@@ -67,8 +75,8 @@ def get_exe_path(appname, version=None):
                 versionnumber = appversion.get('versionnumber')
 
         if path is None:
-            logger.error(f"There is no default version registered for application '{appname}' in Application "
-                         f"Version Manager.")
+            logger.warning(f"There is no default version registered for application '{appname}' in Application "
+                           f"Version Manager.")
             return None
 
     # verify that the executable path exists
@@ -89,8 +97,11 @@ def get_registered_applications():
         Registered applications and versions
     """
     # document tree with application information
-    logger.debug(f"Parsing applications and versions from '{APPVERXML}'.")
-    apps = minidom.parse(APPVERXML).getElementsByTagName('Application')
+    try:
+        apps = minidom.parse(APPVERXML).getElementsByTagName('Application')
+    except (FileNotFoundError, AttributeError) as err:
+        logger.error(f"Failed to parse the 'ApplicationVersion.xml'. The file does not exist.", exc_info=True)
+        raise FileNotFoundError("Failed to parse the 'ApplicationVersion.xml'. The file does not exist.") from err
 
     # find specified application and version
     data = OrderedDict()

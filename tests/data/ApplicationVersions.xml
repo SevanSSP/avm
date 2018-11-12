@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DNVS>
+  <Global>
+    <AutoSetLatestAsDefault>false</AutoSetLatestAsDefault>
+    <AutoUpdateFromRegistry>false</AutoUpdateFromRegistry>
+    <LatestAsDefaultTypeSetting>V</LatestAsDefaultTypeSetting>
+    <Version>3.0</Version>
+  </Global>
+  <Applications>
+    <Application Name="Force">
+      <Version VersionNumber="9.4.3" InstallDir="C:\programs\wadam_94_03\" ExeFilePath="C:\programs\wadam_94_03\Bin\Force.exe" UserManualPath="" Platform="64" ProductType="V" Category="Component" HelpFile="" IsDefault="True" UserSpecifiedDefault="False" PersistenceType="Temp" />
+    </Application>
+    <Application Name="HydroD">
+      <Version VersionNumber="5.0.7" InstallDir="C:\programs\hydrod_50_07\" ExeFilePath="C:\programs\hydrod_50_07\Bin\HydroD.exe" UserManualPath="" Platform="64" ProductType="V" Category="Sesam" HelpFile="" IsDefault="True" UserSpecifiedDefault="False" PersistenceType="Temp" />
+    </Application>
+    <Application Name="License Manager">
+      <Version VersionNumber="11.15.1" InstallDir="C:\programs\flexlm\" ExeFilePath="" UserManualPath="" Platform="64" ProductType="V" Category="" HelpFile="" IsDefault="True" UserSpecifiedDefault="False" PersistenceType="Temp" />
+    </Application>
+    <Application Name="Mimosa">
+      <Version VersionNumber="6.3.8" InstallDir="C:\programs\mimosa_63_08\" ExeFilePath="C:\programs\mimosa_63_08\Bin\Mimosa.exe" UserManualPath="" Platform="32" ProductType="V" Category="Sesam" HelpFile="" IsDefault="True" UserSpecifiedDefault="False" PersistenceType="Temp" />
+    </Application>
+    <Application Name="Postresp">
+      <Version VersionNumber="6.5.1" InstallDir="C:\programs\postresp_65_01\" ExeFilePath="C:\programs\postresp_65_01\Bin\Postresp.exe" UserManualPath="" Platform="32" ProductType="V" Category="Sesam" HelpFile="" IsDefault="True" UserSpecifiedDefault="False" PersistenceType="Temp" />
+    </Application>
+    <Application Name="Poten">
+      <Version VersionNumber="9.4.3" InstallDir="C:\programs\wadam_94_03\" ExeFilePath="C:\programs\wadam_94_03\Bin\Poten.exe" UserManualPath="" Platform="64" ProductType="V" Category="Component" HelpFile="" IsDefault="True" UserSpecifiedDefault="False" PersistenceType="Temp" />
+    </Application>
+    <Application Name="Prefem">
+      <Version VersionNumber="7.1.7" InstallDir="C:\programs\prefem_71_07\" ExeFilePath="C:\programs\prefem_71_07\bin\prefem.EXE" UserManualPath="" Platform="32" ProductType="V" Category="Sesam" HelpFile="" IsDefault="True" UserSpecifiedDefault="False" PersistenceType="Temp" />
+    </Application>
+    <Application Name="Sima">
+      <Version VersionNumber="3.5.0" InstallDir="C:\programs\sima_35_00\" ExeFilePath="C:\programs\sima_35_00\Sima.exe" UserManualPath="" Platform="64" ProductType="V" Category="Sesam" HelpFile="" IsDefault="True" UserSpecifiedDefault="False" PersistenceType="Temp" />
+    </Application>
+    <Application Name="Wadam">
+      <Version VersionNumber="9.4.3" InstallDir="C:\programs\wadam_94_03\" ExeFilePath="C:\programs\wadam_94_03\Bin\Wadam.exe" UserManualPath="" Platform="64" ProductType="V" Category="Sesam" HelpFile="" IsDefault="True" UserSpecifiedDefault="False" PersistenceType="Temp" />
+    </Application>
+    <Application Name="prewad">
+      <Version VersionNumber="6.2.8" InstallDir="C:\Program Files (x86)\DNVGL\prewad_62_08" ExeFilePath="C:\Program Files (x86)\DNVGL\prewad_62_08\prewad.EXE" UserManualPath="" Platform="32" ProductType="V" Category="Custom" HelpFile="" IsDefault="True" UserSpecifiedDefault="False" PersistenceType="Fixed" />
+    </Application>
+    <Application Name="riflex">
+      <Version VersionNumber="4.12.3" InstallDir="C:\programs\riflex_simo_4123\Riflex" ExeFilePath="" UserManualPath="" Platform="32" ProductType="V" Category="Custom" HelpFile="" IsDefault="True" UserSpecifiedDefault="False" PersistenceType="Fixed" />
+    </Application>
+    <Application Name="simo">
+      <Version VersionNumber="4.12.3" InstallDir="C:\programs\riflex_simo_4123\Simo\bin" ExeFilePath="C:\programs\riflex_simo_4123\Simo\bin\simo.exe" UserManualPath="" Platform="64" ProductType="V" Category="Custom" HelpFile="" IsDefault="True" UserSpecifiedDefault="False" PersistenceType="Fixed" />
+    </Application>
+  </Applications>
+</DNVS>
