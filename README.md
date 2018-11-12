@@ -51,15 +51,11 @@ avm-list
 
 All versions
 
-Only default application versions.
-
 ```bash
 avm-list --all-versions
 ```
 
 Toggle logger level so that debug-level info is piped to console.
-
-Only default application versions
 
 ```bash
 avm-list --all-versions --logging-level debug
