@@ -39,4 +39,4 @@ path = get_exe_path('wadam', version='9.4.3')
 ```  
 
 ## Documentation
-NO documentation yet. Sorry!
+No documentation yet. Sorry!
