@@ -10,15 +10,8 @@ from collections import OrderedDict
 # configure logger
 logger = logging.getLogger(__name__)
 
-# path to applicationversionmanager xml
-try:
-    APPVERXML = os.path.join(os.getenv('appdata'), 'DNVGL', 'ApplicationVersionManager', 'ApplicationVersions.xml')
-except TypeError:
-    logger.warning("No environmental variable called 'APPDATA'. Unable to find 'ApplicationVersions.xml'.")
-    APPVERXML = None
 
-
-def exe_path(appname, version=None):
+def exe_path(appname, version=None, appverxml=None):
     """
     Return absolute path to DNV GL application executable
 
@@ -29,6 +22,8 @@ def exe_path(appname, version=None):
     version : str, optional
         Application version, by default the application marked as default in
         Application Version Manager is used.
+    appverxml : str, optional
+        XML file listing application-versions. By default the file in APPDATA is applied.
 
     Returns
     -------
@@ -43,7 +38,7 @@ def exe_path(appname, version=None):
     """
     # all registered applications
     try:
-        appdata = registered_applications()
+        appdata = registered_applications(appverxml=appverxml)
     except FileNotFoundError:
         logger.error(f"Failed to load application version data", exc_info=True)
         raise
@@ -87,18 +82,40 @@ def exe_path(appname, version=None):
         return path
 
 
-def registered_applications():
+def registered_applications(appverxml=None):
     """
     Get all applications registered in Application Version Manager
+
+    Parameters
+    ----------
+    appverxml : str, optional
+        XML file listing application-versions. By default the file in APPDATA is applied.
 
     Returns
     -------
     OrderedDict
         Registered applications and versions
     """
-    # document tree with application information
+    # Try to locate the ApplicationVersions.xml in appdata, if it is not specified
+    if appverxml is None:
+        try:
+            appverxml = os.path.join(os.getenv('appdata'), 'DNVGL', 'ApplicationVersionManager',
+                                     'ApplicationVersions.xml')
+        except TypeError:
+            logger.error("No environmental variable called 'APPDATA'. Unable to find 'ApplicationVersions.xml'.")
+            raise FileNotFoundError("No environmental variable called 'APPDATA'. Unable to find "
+                                    "'ApplicationVersions.xml'.")
+
+    # Verify the existence of the xml file
+    if os.path.exists(appverxml):
+        logger.debug(f"Using the xml file '{appverxml}'.")
+    else:
+        logger.error(f"The xml file '{appverxml}' does not exist.")
+        raise FileNotFoundError(f"The xml file '{appverxml}' does not exist.")
+
+    # parse document tree with application information
     try:
-        apps = minidom.parse(APPVERXML).getElementsByTagName('Application')
+        apps = minidom.parse(appverxml).getElementsByTagName('Application')
     except (FileNotFoundError, AttributeError) as err:
         logger.error(f"Failed to parse the 'ApplicationVersion.xml'. The file does not exist.", exc_info=True)
         raise FileNotFoundError("Failed to parse the 'ApplicationVersion.xml'. The file does not exist.") from err
