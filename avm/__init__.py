@@ -1,1 +1,1 @@
-from .avm import get_exe_path, get_registered_applications
+from .avm import exe_path, registered_applications

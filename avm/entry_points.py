@@ -4,7 +4,7 @@ Console entry points for the avm package
 """
 import argparse
 import logging
-from .avm import get_registered_applications
+from .avm import registered_applications
 
 
 # setup logging levels
@@ -42,7 +42,7 @@ def list_applications():
     logger.addHandler(ch)
 
     # get application version data
-    data = get_registered_applications()
+    data = registered_applications()
 
     # print application details to screen
     print(115 * "=")
