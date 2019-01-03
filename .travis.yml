@@ -5,3 +5,13 @@ python:
 
 install: pip install tox-travis
 script: tox
+
+deploy:
+  provider: pypi
+  user: $PACKAGR_USER_NAME
+  password: $PACKAGR_PASSWORD
+  server: $PACKAGR_REPOSITORY_URL
+  distributions: "bdist_wheel"
+  on:
+    branch: master
+  verbose: true
