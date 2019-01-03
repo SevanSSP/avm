@@ -29,15 +29,17 @@ import avm
 Get the executable path of the 'wadam' application. Default version.
 
 ```python
-from avm import get_exe_path
+from avm import exe_path
 
-path = get_exe_path('wadam')
+path = exe_path('wadam')
 ```  
 
 Get the executable path of the 'wadam' application. Default version.
 
 ```python
-path = get_exe_path('wadam', version='9.4.3')
+from avm import exe_path
+
+path = exe_path('wadam', version='9.4.3')
 ```  
 
 ### Console entry point
