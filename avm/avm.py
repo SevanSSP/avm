@@ -14,7 +14,7 @@ logger = logging.getLogger(__name__)
 try:
     APPVERXML = os.path.join(os.getenv('appdata'), 'DNVGL', 'ApplicationVersionManager', 'ApplicationVersions.xml')
 except TypeError:
-    logger.error("Failed to locate 'ApplicationVersions.xml'. No environmental variable called 'APPDATA'.")
+    logger.warning("No environmental variable called 'APPDATA'. Unable to find 'ApplicationVersions.xml'.")
     APPVERXML = None
 
 
