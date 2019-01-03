@@ -18,7 +18,7 @@ except TypeError:
     APPVERXML = None
 
 
-def get_exe_path(appname, version=None):
+def exe_path(appname, version=None):
     """
     Return absolute path to DNV GL application executable
 
@@ -43,7 +43,7 @@ def get_exe_path(appname, version=None):
     """
     # all registered applications
     try:
-        appdata = get_registered_applications()
+        appdata = registered_applications()
     except FileNotFoundError:
         logger.error(f"Failed to load application version data", exc_info=True)
         raise
@@ -87,7 +87,7 @@ def get_exe_path(appname, version=None):
         return path
 
 
-def get_registered_applications():
+def registered_applications():
     """
     Get all applications registered in Application Version Manager
 
