@@ -13,10 +13,8 @@ Based on parsing the Application Version Manager XML file with application detai
 Install the package from PyPri using pip
 
 ```bash
-pip install --extra-index-url  https://api.python-private-package-index.com/EYvhW6SyL/ avm
+pip install avm --extra-index-url https://api.packagr.app/EYvhW6SyL/ --disable-pip-version-check
 ```
-
-**Note that the PyPri account is not yet active and the package is therefore not available for download.**
 
 ## Usage
 ### Import package
