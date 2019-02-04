@@ -40,7 +40,7 @@ from avm import exe_path
 path = exe_path('wadam', version='9.4.3')
 ```  
 
-### Console entry point
+### Command Line Interface (CLI)
 List details about the applications and versions registered in Application Version Manager.
 
 Only default application versions.
