@@ -13,7 +13,7 @@ Based on parsing the Application Version Manager XML file with application detai
 Install the package from Packagr using pip
 
 ```bash
- pip install avm --extra-index-url https://api.packagr.app/EYvhW6SyL/ --disable-pip-version-check
+pip install avm --extra-index-url https://api.packagr.app/EYvhW6SyL/ --disable-pip-version-check
 ```
 
 ## Usage
