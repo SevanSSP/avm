@@ -10,7 +10,7 @@ Python package for interacting with DNV GL Software's Application Version Manage
 Based on parsing the Application Version Manager XML file with application details.
 
 ## Installation
-Install the package from PyPri using pip
+Install the package from Packagr using pip
 
 ```bash
 pip install avm --extra-index-url https://api.packagr.app/EYvhW6SyL/ --disable-pip-version-check
@@ -40,7 +40,7 @@ from avm import exe_path
 path = exe_path('wadam', version='9.4.3')
 ```  
 
-### Console entry point
+### Command Line Interface (CLI)
 List details about the applications and versions registered in Application Version Manager.
 
 Only default application versions.
