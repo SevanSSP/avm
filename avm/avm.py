@@ -79,7 +79,7 @@ def exe_path(appname, version=None, appverxml=None):
         logger.warning(f"The executable path '{path}' for application/version {appname}/{versionnumber} does not exist.")
         return None
     else:
-        return path
+        return f'"{path}"'
 
 
 def registered_applications(appverxml=None):
