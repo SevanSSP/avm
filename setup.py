@@ -9,7 +9,7 @@ def read(fname):
 
 setup(
     name='avm',
-    version='1.0.2',
+    version='1.0.3',
     packages=find_packages(exclude='tests'),
     url='https://github.com/SevanSSP/avm',
     license='MIT',
