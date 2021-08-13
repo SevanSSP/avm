@@ -2,31 +2,7 @@ import nox
 
 
 # override default sessions
-nox.options.sessions = ["lint", "tests"]
-
-
-@nox.session
-def lint(session):
-    """Highlight syntactical and stylistic problems in the code."""
-    session.install("flake8")
-    session.run(
-        "flake8",
-        "avm/",
-        "--count",
-        "--select=E9,F63,F7,F82",
-        "--show-source",
-        "--statistics",
-    )
-    session.run(
-        "flake8",
-        "avm/",
-        "--count",
-        "--exit-zero",
-        "--max-complexity=10",
-        "--max-line-length=127",
-        "--statistics",
-    )
-
+nox.options.sessions = ["tests"]
 
 @nox.session
 def tests(session):
