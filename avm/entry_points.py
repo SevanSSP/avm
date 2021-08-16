@@ -65,4 +65,3 @@ def list_applications():
                 continue
 
     print(115 * "=")
-
