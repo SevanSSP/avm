@@ -1,23 +1,22 @@
 [tool.poetry]
-name = "avn"
+name = "avm"
 version = "1.0.2"
-description = ""
-authors = ["Einar Bernt Glomnes, Sevan SSP <ebg@sevassp.com>"]
+description = "Interact with DNV GL Software's Application Version Manager"
+authors = ["Per Voie, Sevan SSP <pev@sevanssp.com>"]
+license = "MIT"
+readme = "README.md"
+repository = "https://github.com/SevanSSP/avm/"
+
+[tool.poetry.scripts]
+avm-list = "avm.entry_points:list_applications"
 
 [tool.poetry.dependencies]
 python = "^3.7"
-nox = "^2021.6.12"
-f90nml = "0.21"
-xlrd = "1.2.0"
-pydantic = "^1.8.2"
-desifer = "^0.1.0"
-zmq = "^0.0.0"
-pymatbridge = "^0.5.2"
-sympy = "^1.8"
-
 
 [tool.poetry.dev-dependencies]
 nox = "^2021.6.12"
+pytest = "^6"
+pytest-cov = "^2"
 
 [[tool.poetry.source]]
 name = "private_pypi"
@@ -25,7 +24,7 @@ url = "https://api.packagr.app/EYvhW6SyL/"
 
 [tool.poetry.urls]
 download = "https://api.packagr.app/EYvhW6SyL/"
-issues = "https://github.com/SevanSSP/avn/issues"
+issues = "https://github.com/SevanSSP/avm/issues"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

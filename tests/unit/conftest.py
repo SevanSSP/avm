@@ -1,6 +1,7 @@
 import os
-from avm import registered_applications
 import pytest
+from avm import registered_applications
+
 
 @pytest.fixture(scope='function')
 def setUp():
