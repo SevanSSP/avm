@@ -1,5 +1,5 @@
 # AVM
-[![Build Status](https://travis-ci.com/SevanSSP/avm.svg?token=3uQ4z5yHC2AVPsxguFuR&branch=master)](https://travis-ci.com/SevanSSP/avm)
+[![Build status](https://github.com/SevanSSP/avm/actions/workflows/build.yml/badge.svg)](https://github.com/SevanSSP/avm/actions/workflows/build.yml)
 ## Description
 Python package for interacting with DNV GL Software's Application Version Manager.
 
