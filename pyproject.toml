@@ -1,0 +1,31 @@
+[tool.poetry]
+name = "avm"
+version = "1.0.2"
+description = "Interact with DNV GL Software's Application Version Manager"
+authors = ["Per Voie, Sevan SSP <pev@sevanssp.com>"]
+license = "MIT"
+readme = "README.md"
+repository = "https://github.com/SevanSSP/avm/"
+
+[tool.poetry.scripts]
+avm-list = "avm.entry_points:list_applications"
+
+[tool.poetry.dependencies]
+python = "^3.7"
+
+[tool.poetry.dev-dependencies]
+nox = "^2021.6.12"
+pytest = "^6"
+pytest-cov = "^2"
+
+[[tool.poetry.source]]
+name = "private_pypi"
+url = "https://api.packagr.app/EYvhW6SyL/"
+
+[tool.poetry.urls]
+download = "https://api.packagr.app/EYvhW6SyL/"
+issues = "https://github.com/SevanSSP/avm/issues"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
