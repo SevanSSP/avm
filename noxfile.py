@@ -12,7 +12,7 @@ def lint(session):
     session.install("flake8")
     session.run(
         "flake8",
-        "hydra_radical/",
+        "avm/",
         "--count",
         "--select=E9,F63,F7,F82",
         "--show-source",
@@ -20,7 +20,7 @@ def lint(session):
     )
     session.run(
         "flake8",
-        "hydra_radical/",
+        "avm/",
         "--count",
         "--per-file-ignores=__init__.py:F401",
         "--exit-zero",
