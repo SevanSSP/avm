@@ -5,6 +5,7 @@ Module for working with DNVGL Application Version Manager
 import logging
 import os
 from xml.dom import minidom
+from xml.parsers.expat import ExpatError
 from collections import OrderedDict
 
 # configure logger
@@ -40,8 +41,8 @@ def exe_path(appname, version=None, appverxml=None):
     try:
         appdata = registered_applications(appverxml=appverxml)
     except FileNotFoundError:
-        logger.error(f"Failed to load application version data", exc_info=True)
-        raise
+        logger.error("Failed to load application version data", exc_info=True)
+        raise FileNotFoundError("Failed to load application version data")
 
     # get app data
     app = appdata.get(appname.lower())
@@ -51,9 +52,8 @@ def exe_path(appname, version=None, appverxml=None):
 
     if version is not None:
         # requested specific version
-        try:
-            appversion = app.get(version.lower())
-        except KeyError:
+        appversion = app.get(version.lower())
+        if not appversion:
             logger.warning(f"Version '{version}' of application '{appname}' is not registered in Application "
                            f"Version Manager.")
             return None
@@ -122,8 +122,8 @@ def installation_path(appname, version=None, appverxml=None):
     try:
         appdata = registered_applications(appverxml=appverxml)
     except FileNotFoundError:
-        logger.error(f"Failed to load application version data", exc_info=True)
-        raise
+        logger.error("Failed to load application version data", exc_info=True)
+        raise FileNotFoundError("Failed to load application version data")
 
     # get app data
     app = appdata.get(appname.lower())
@@ -183,8 +183,8 @@ def all_versions(appname, appverxml=None):
     try:
         appdata = registered_applications(appverxml=appverxml)
     except FileNotFoundError:
-        logger.error(f"Failed to load application version data", exc_info=True)
-        raise
+        logger.error("Failed to load application version data", exc_info=True)
+        raise FileNotFoundError("Failed to load application version data")
 
     # get app data
     app = appdata.get(appname.lower())
@@ -220,8 +220,8 @@ def latest_version(appname, below=None, appverxml=None):
         below_patch = None
     else:
         below_txt = below.split('.')
-        if len(below_txt) == len(below):
-            below_major = int(below_txt)
+        if len(below_txt) == 1:
+            below_major = int(below_txt[0])
             below_minor = None
             below_patch = None
         elif len(below_txt) == 2:
@@ -237,14 +237,14 @@ def latest_version(appname, below=None, appverxml=None):
 
     candidate = None
 
-    for version, _ in all_versions(appname, appverxml):
+    for version, _ in all_versions(appname, appverxml).items():
         version_major, version_minor, version_patch = map(int, version.split('.'))
 
         if not below_major or (
                 version_major < below_major) or (
-                version_major == below_major and not below_minor and
+                version_major == below_major and below_minor and
                 version_major == below_major and version_minor < below_minor) or (
-                version_major == below_major and version_minor == below_minor and not below_patch and
+                version_major == below_major and version_minor == below_minor and below_patch and
                 version_major == below_major and version_minor == below_minor and version_patch < below_patch
         ):
 
@@ -255,11 +255,11 @@ def latest_version(appname, below=None, appverxml=None):
                 if candidate_major > version_major:
                     candidate = version
                     continue
-                elif candidate_major == version_major and candidate_minor > version_minor:
+                elif candidate_major == version_major and candidate_minor < version_minor:
                     candidate = version
                     continue
                 elif candidate_major == version_major and candidate_minor == version_minor and (
-                        candidate_patch > version_patch):
+                        candidate_patch < version_patch):
                     candidate = version
                     continue
                 else:
@@ -288,12 +288,24 @@ def registered_applications(appverxml=None):
     # Try to locate the ApplicationVersions.xml in appdata, if it is not specified
     if appverxml is None:
         try:
-            appverxml = os.path.join(os.getenv('appdata'), 'DNVGL', 'ApplicationVersionManager',
-                                     'ApplicationVersions.xml')
+            if os.path.exists(
+                    os.path.join(os.getenv('appdata'), 'DNVGL', 'ApplicationVersionManager',
+                                 'ApplicationVersions.xml')
+            ):
+                appverxml = os.path.join(os.getenv('appdata'), 'DNVGL', 'ApplicationVersionManager',
+                                         'ApplicationVersions.xml')
+
+            elif os.path.exists(
+                    os.path.join(os.getenv('appdata'), 'DNV', 'ApplicationVersionManager',
+                                 'ApplicationVersions.xml')
+            ):
+                appverxml = os.path.join(os.getenv('appdata'), 'DNV', 'ApplicationVersionManager',
+                                         'ApplicationVersions.xml')
+            else:
+                raise FileNotFoundError("Unable to automatically find 'ApplicationVersions.xml'")
         except TypeError:
             logger.error("No environmental variable called 'APPDATA'. Unable to find 'ApplicationVersions.xml'.")
-            raise FileNotFoundError("No environmental variable called 'APPDATA'. Unable to find "
-                                    "'ApplicationVersions.xml'.")
+            raise TypeError("No environmental variable called 'APPDATA'. Unable to find 'ApplicationVersions.xml'.")
 
     # Verify the existence of the xml file
     if os.path.exists(appverxml):
@@ -305,9 +317,9 @@ def registered_applications(appverxml=None):
     # parse document tree with application information
     try:
         apps = minidom.parse(appverxml).getElementsByTagName('Application')
-    except (FileNotFoundError, AttributeError) as err:
-        logger.error(f"Failed to parse the 'ApplicationVersion.xml'. The file does not exist.", exc_info=True)
-        raise FileNotFoundError("Failed to parse the 'ApplicationVersion.xml'. The file does not exist.") from err
+    except (AttributeError, ExpatError) as e:
+        logger.error(f"Failed to parse {appverxml}", exc_info=True)
+        raise e
 
     # find specified application and version
     data = OrderedDict()

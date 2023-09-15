@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DNVS>
+  <Global>
+    <AutoSetLatestAsDefault>false</AutoSetLatestAsDefault>
+    <AutoUpdateFromRegistry>false</AutoUpdateFromRegistry>
+    <LatestAsDefaultTypeSetting>V</LatestAsDefaultTypeSetting>
+    <Version>3.0</Version>
+  </Global>
+  <Applications>
+    <Applicationd>
+      <Version VersionNumber="6.2-08" InstallDir="C:\Program Files (x86)\DNVGL\Prewad V6.2-08" ExeFilePath="C:\Program Files (x86)\DNVGL\Prewad V6.2-08\prewad.EXE" UserManualPath="" Platform="32" ProductType="V" Category="Custom" HelpFile="" IsDefault="True" UserSpecifiedDefault="False" PersistenceType="Fixed" />
+    </Applicatn>
+  </Applications>
+</DNVS>
