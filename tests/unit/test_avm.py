@@ -1,3 +1,5 @@
+import os
+
 import pytest
 import sys
 
@@ -99,7 +101,8 @@ def test_registered_applications(xml_file_path, faulty_xml_file_path, monkeypatc
         _ = registered_applications(appverxml=faulty_xml_file_path)
 
     with pytest.raises(TypeError):
-        monkeypatch.delenv('APPDATA')
+        if os.getenv('APPDATA'):
+            monkeypatch.delenv('APPDATA')
 
         _ = registered_applications()
 
