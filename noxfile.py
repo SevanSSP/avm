@@ -1,5 +1,6 @@
 import nox
-
+import tempfile
+import os
 
 # override default sessions
 nox.options.sessions = ["lint", "tests"]
@@ -11,7 +12,7 @@ def lint(session):
     session.install("flake8")
     session.run(
         "flake8",
-        "avm/",
+        "hydra_radical/",
         "--count",
         "--select=E9,F63,F7,F82",
         "--show-source",
@@ -19,8 +20,9 @@ def lint(session):
     )
     session.run(
         "flake8",
-        "avm/",
+        "hydra_radical/",
         "--count",
+        "--per-file-ignores=__init__.py:F401",
         "--exit-zero",
         "--max-complexity=10",
         "--max-line-length=127",
@@ -32,29 +34,25 @@ def lint(session):
 def tests(session):
     """Run test suite."""
     # install dependencies
-    session.run("poetry", "install", external=True)
-    session.install("pytest")
-    session.install("coverage")
+    req_path = os.path.join(tempfile.gettempdir(), 'requirements.txt')
+    session.install("poetry")
 
-    # unit tests
-    testfiles = session.posargs or ["tests/"]
-    session.run("coverage", "run", "-m", "pytest", *testfiles)
-    session.notify("cover")
+    session.run(
+        "poetry",
+        "export",
+        "--with=dev",
+        "--format=requirements.txt",
+        f"--output={req_path}",
+        external=True,
+    )
+    session.install("-r", req_path)
 
+    # run tests
+    session.run("pytest", "-s", "tests", "--cov=avm", "--cov-report=term-missing", "--cov-fail-under=95")
 
-@nox.session
-def cover(session):
-    """Analyse and report test coverage."""
-    session.install("coverage")
-    # TODO: Add "--fail-under=99" once test coverage is improved
-    session.run("coverage", "report", "--show-missing")
-    session.run("coverage", "erase")
+    # install avm
+    session.install(".", "--no-deps")
 
-
-@nox.session
-def blacken(session):
-    """Run black code formatter."""
-    session.install("black", "isort")
-    files = ["avm", "tests", "noxfile.py"]
-    session.run("black", *files, "--diff", "--color")
-    session.run("isort", *files, "--diff")
+    # test CLI
+    session.run("avm-list")
+    session.run("avm-list", "--all-versions")
