@@ -86,11 +86,11 @@ def exe_path(appname, version=None, appverxml=None):
 
     # verify that the executable path exists
     if not os.path.exists(path):
-        logger.warning(f"The executable path '{path}' for application/version {appname}/{versionnumber} does not exist.")
+        logger.warning(
+            f"The executable path '{path}' for application/version {appname}/{versionnumber} does not exist.")
         return None
     else:
         return f'"{path}"'
-
 
 
 def installation_path(appname, version=None, appverxml=None):
@@ -131,7 +131,6 @@ def installation_path(appname, version=None, appverxml=None):
         logger.warning(f"Application '{appname}' is not registered in Application Version Manager.", exc_info=True)
         return None
 
-
     if version is not None:
         # requested specific version
         appversion = app.get(version.lower())
@@ -162,6 +161,114 @@ def installation_path(appname, version=None, appverxml=None):
         return None
     else:
         return f'"{path}"'
+
+
+def all_versions(appname, appverxml=None):
+    """
+    Get all versions of an application registered in Application Version Manager
+
+    Parameters
+    ----------
+    appname : str
+        Application name
+    appverxml : str, optional
+        XML file listing application-versions. By default the file in APPDATA is applied.
+
+    Returns
+    -------
+    OrderedDict
+        Registered applications and versions
+    """
+    # all registered applications
+    try:
+        appdata = registered_applications(appverxml=appverxml)
+    except FileNotFoundError:
+        logger.error(f"Failed to load application version data", exc_info=True)
+        raise
+
+    # get app data
+    app = appdata.get(appname.lower())
+    if app is None:
+        logger.warning(f"Application '{appname}' is not registered in Application Version Manager.", exc_info=True)
+        return None
+
+    return app
+
+
+def latest_version(appname, below=None, appverxml=None):
+    """
+    Get the latest version of an application registered in Application Version Manager
+
+    Parameters
+    ----------
+    appname : str
+        Application name
+    below : str, optional, f"{major}[.{minor}[.{patch}]]"
+        Version below which to return the latest version, by default the latest installed version is returned.
+    appverxml : str, optional
+        XML file listing application-versions. By default the file in APPDATA is applied.
+
+    Returns
+    -------
+    str : f"{major}.{minor}.{patch}"
+        Latest available version of the application, optionally below a certain version
+    """
+
+    if below is None:
+        below_major = None
+        below_minor = None
+        below_patch = None
+    else:
+        below_txt = below.split('.')
+        if len(below_txt) == len(below):
+            below_major = int(below_txt)
+            below_minor = None
+            below_patch = None
+        elif len(below_txt) == 2:
+            below_major = int(below_txt[0])
+            below_minor = int(below_txt[1])
+            below_patch = None
+        elif len(below_txt) == 3:
+            below_major = int(below_txt[0])
+            below_minor = int(below_txt[1])
+            below_patch = int(below_txt[2])
+        else:
+            raise ValueError(f'Incorrect version definition used: below={below}')
+
+    candidate = None
+
+    for version, _ in all_versions(appname, appverxml):
+        version_major, version_minor, version_patch = map(int, version.split('.'))
+
+        if not below_major or (
+                version_major < below_major) or (
+                version_major == below_major and not below_minor and
+                version_major == below_major and version_minor < below_minor) or (
+                version_major == below_major and version_minor == below_minor and not below_patch and
+                version_major == below_major and version_minor == below_minor and version_patch < below_patch
+        ):
+
+            if not candidate:
+                candidate = version
+            else:
+                candidate_major, candidate_minor, candidate_patch = map(int, candidate.split('.'))
+                if candidate_major > version_major:
+                    candidate = version
+                    continue
+                elif candidate_major == version_major and candidate_minor > version_minor:
+                    candidate = version
+                    continue
+                elif candidate_major == version_major and candidate_minor == version_minor and (
+                        candidate_patch > version_patch):
+                    candidate = version
+                    continue
+                else:
+                    continue
+
+    if not candidate:
+        raise ValueError(f'No {appname} version below {below} found')
+    else:
+        return candidate
 
 
 def registered_applications(appverxml=None):
@@ -205,16 +312,16 @@ def registered_applications(appverxml=None):
     # find specified application and version
     data = OrderedDict()
     for app in apps:
-        appname = app.getAttribute('Name').lower()                  # lowercase for increased robustness
+        appname = app.getAttribute('Name').lower()  # lowercase for increased robustness
         versions = app.getElementsByTagName('Version')
         appdata = OrderedDict()
         for version in versions:
-            vnumber = version.getAttribute('VersionNumber').lower() # lowercase for increased robustness
+            vnumber = version.getAttribute('VersionNumber').lower()  # lowercase for increased robustness
             exepath = version.getAttribute('ExeFilePath')
             installdir = version.getAttribute('InstallDir')
             platform = version.getAttribute('Platform')
             producttype = version.getAttribute('ProductType')
-            category  = version.getAttribute('Category')
+            category = version.getAttribute('Category')
             isdefault = True if version.getAttribute('IsDefault').lower() == 'true' else False
             appdata[vnumber] = OrderedDict(
                 versionnumber=vnumber,
@@ -231,4 +338,3 @@ def registered_applications(appverxml=None):
         data[appname] = appdata
 
     return data
-
