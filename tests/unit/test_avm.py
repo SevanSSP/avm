@@ -8,18 +8,23 @@ from xml.parsers.expat import ExpatError
 from avm import exe_path, installation_path, all_versions, latest_version, registered_applications, list_applications
 
 
-def test_exe_path(xml_file_path):
+def test_exe_path(xml_file_path, xml_input):
+    _, subs = xml_input
+
     default_wadam_path = exe_path('wadam', appverxml=xml_file_path)
-    assert default_wadam_path == r'"C:\Program Files\DNVGL\Wadam V9.5-03\Bin\Wadam.exe"'
+    assert default_wadam_path == f'"{subs["WADAM_EXE"]}"'
 
     v9_2_4_wadam_path = exe_path(appname='wadam', version='9.2.4', appverxml=xml_file_path)
-    assert v9_2_4_wadam_path == r'"C:\Program Files (x86)\DNVGL\Wadam V9.2-04\Bin\Wadam.exe"'
+    assert v9_2_4_wadam_path == f'"{subs["WADAM_924_EXE"]}"'
 
     not_there = exe_path(appname='dadam', appverxml=xml_file_path)
     assert not_there is None
 
     version_not_there = exe_path(appname='wadam', version='205.2.1', appverxml=xml_file_path)
     assert version_not_there is None
+
+    file_not_there = exe_path(appname='wadam', version='9.5.2', appverxml=xml_file_path)
+    assert file_not_there is None
 
     no_default = exe_path(appname='nodefault', appverxml=xml_file_path)
     assert no_default is None
@@ -39,9 +44,11 @@ def test_exe_path(xml_file_path):
         _ = exe_path(appname='wadam', appverxml='not_here')
 
 
-def test_installation_path(xml_file_path):
+def test_installation_path(xml_file_path, xml_input):
+    _, subs = xml_input
+
     default_wadam_installation_path = installation_path('wadam', appverxml=xml_file_path)
-    assert default_wadam_installation_path == r'"C:\Program Files\DNVGL\Wadam V9.5-03\"'
+    assert default_wadam_installation_path == f'"{subs["WADAM_DIR"]}"'
     assert default_wadam_installation_path == installation_path('wadam', version='9.5.3',
                                                                 appverxml=xml_file_path)
 
@@ -50,6 +57,9 @@ def test_installation_path(xml_file_path):
 
     version_not_there = installation_path('wadam', version='205.2.1', appverxml=xml_file_path)
     assert version_not_there is None
+
+    folder_not_there = installation_path('wadam', version='9.5.2', appverxml=xml_file_path)
+    assert folder_not_there is None
 
     no_default = installation_path('nodefault', appverxml=xml_file_path)
     assert no_default is None
@@ -113,19 +123,19 @@ def test_registered_applications(xml_file_path, faulty_xml_file_path, monkeypatc
 
 def test_list_applications(xml_file_path, capsys, monkeypatch):
     with monkeypatch.context() as m:
-        m.setattr(sys, 'argv', ['avm-list'])
+        m.setattr(sys, 'argv', ['avm-list', fr'--xml-file={xml_file_path}'])
         list_applications()
         captured = capsys.readouterr()
         assert 115 * "=" in captured.out
 
     with monkeypatch.context() as m:
-        m.setattr(sys, 'argv', ['avm-list', '--all-versions'])
+        m.setattr(sys, 'argv', ['avm-list', '--all-versions', fr'--xml-file={xml_file_path}'])
         list_applications()
         captured = capsys.readouterr()
         assert 115 * "=" in captured.out
 
     with monkeypatch.context() as m:
-        m.setattr(sys, 'argv', ['avm-list', '--logging-level', 'debug'])
+        m.setattr(sys, 'argv', ['avm-list', '--logging-level', 'debug', fr'--xml-file={xml_file_path}'])
         list_applications()
         captured = capsys.readouterr()
         assert 115 * "=" in captured.out

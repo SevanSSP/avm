@@ -6,7 +6,6 @@ import argparse
 import logging
 from .avm import registered_applications
 
-
 # setup logging levels
 LOGGING_LEVELS = dict(
     debug=logging.DEBUG,
@@ -26,6 +25,9 @@ def list_applications():
                                                  " Manager.")
     parser.add_argument("--all-versions", action="store_true",
                         help="List all versions, not just the ones marked as default.")
+    parser.add_argument("--xml-file", dest='xml_file', action='store',
+                        help="XML file listing application-versions.")
+
     parser.add_argument("-l", "--logging-level", default="info", choices=list(LOGGING_LEVELS.keys()),
                         help="Set logging level.")
 
@@ -42,12 +44,12 @@ def list_applications():
     logger.addHandler(ch)
 
     # get application version data
-    data = registered_applications()
+    data = registered_applications(appverxml=args.xml_file)
 
     # print application details to screen
     print(115 * "=")
     print("{:20} {:10} {:8} {}".format('Application', 'Version', 'Default', 'Executable'))
-    print(115*"-")
+    print(115 * "-")
     for appname, app in data.items():
         for versionnumber, version in app.items():
             isdefault = version.get('default')
