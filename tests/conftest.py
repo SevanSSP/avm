@@ -12,15 +12,19 @@ def xml_input(tmp_path_factory):
         'WADAM_EXE': tmp_path.joinpath('WADAM', 'WADAM.txt'),
         'WADAM_924_EXE': tmp_path.joinpath('WADAM', 'WADAM_924.txt'),
         'NON_EXIST_DIR': os.path.join(tmp_path, 'NON_EXIST_DIR'),
-        'NON_EXIST_EXE': os.path.join(tmp_path, 'NON_EXIST_DIR', 'NON_EXIST.txt')
+        'NON_EXIST_EXE': os.path.join(tmp_path, 'NON_EXIST_DIR', 'NON_EXIST.txt'),
+        'SIMO_DIR': os.path.join(tmp_path, 'SIMO'),
+        'RIFLEX_DIR': os.path.join(tmp_path, 'RIFLEX'),
     }
 
-    os.makedirs(subs['WADAM_DIR'])
-    with open(subs['WADAM_EXE'], 'w') as f:
-        f.write('WADAM')
+    for key in ['WADAM_DIR', 'SIMO_DIR', 'RIFLEX_DIR']:
+        os.makedirs(subs[key])
 
-    with open(subs['WADAM_924_EXE'], 'w') as f:
-        f.write('WADAM_924')
+    for key in ['WADAM_EXE', 'WADAM_924_EXE']:
+        open(subs[key], 'w').close()
+
+    for key, file in zip(['SIMO_DIR', 'RIFLEX_DIR'], ['simo\\bin\\rsimo.exe', 'riflex\\bin\\riflex.bat']):
+        open(subs[key]+file, 'w').close()
 
     return tmp_path, subs
 

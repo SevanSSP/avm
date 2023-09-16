@@ -110,8 +110,10 @@ def test_registered_applications(xml_file_path, faulty_xml_file_path, monkeypatc
     with pytest.raises(ExpatError):
         _ = registered_applications(appverxml=faulty_xml_file_path)
 
-    monkeypatch.setenv('APPDATA', 'not_here')
     with pytest.raises(FileNotFoundError):
+        monkeypatch.setenv('APPDATA', 'not_here')
+        if not os.getenv('APPDATA'):
+            raise ValueError('Monkeypatch failed')
         _ = registered_applications()
 
     with pytest.raises(TypeError):

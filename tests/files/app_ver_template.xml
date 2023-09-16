@@ -35,7 +35,7 @@
       <Version VersionNumber="7.1.7" InstallDir="C:\Program Files (x86)\DNVGL\Prefem V7.1-07\" ExeFilePath="C:\Program Files (x86)\DNVGL\Prefem V7.1-07\bin\prefem.EXE" UserManualPath="" Platform="32" ProductType="V" Category="Sesam" HelpFile="" IsDefault="True" UserSpecifiedDefault="False" PersistenceType="Temp" />
     </Application>
     <Application Name="Riflex">
-      <Version VersionNumber="4.20.4" InstallDir="C:\Program Files\DNV\Riflex Simo V4.20-04\" ExeFilePath="" UserManualPath="" Platform="64" ProductType="V" Category="Custom" HelpFile="" IsDefault="True" UserSpecifiedDefault="False" PersistenceType="Fixed" />
+      <Version VersionNumber="4.20.4" InstallDir="$RIFLEX_DIR" ExeFilePath="" UserManualPath="" Platform="64" ProductType="V" Category="Custom" HelpFile="" IsDefault="True" UserSpecifiedDefault="False" PersistenceType="Fixed" />
     </Application>
     <Application Name="Sima">
       <Version VersionNumber="4.4.0" InstallDir="C:\Program Files\DNV\Sima V4.4-00\" ExeFilePath="C:\Program Files\DNV\Sima V4.4-00\Sima.exe" UserManualPath="" Platform="64" ProductType="V" Category="Sesam" HelpFile="" IsDefault="True" UserSpecifiedDefault="False" PersistenceType="Temp" />
@@ -43,7 +43,7 @@
       <Version VersionNumber="4.1.2" InstallDir="C:\Program Files\DNV\Sima V4.1-02\" ExeFilePath="C:\Program Files\DNV\Sima V4.1-02\Sima.exe" UserManualPath="" Platform="64" ProductType="V" Category="Sesam" HelpFile="" IsDefault="False" UserSpecifiedDefault="False" PersistenceType="Temp" />
     </Application>
     <Application Name="Simo">
-      <Version VersionNumber="4.20.4" InstallDir="C:\Program Files\DNV\Riflex Simo V4.20-04\" ExeFilePath="" UserManualPath="" Platform="64" ProductType="V" Category="Custom" HelpFile="" IsDefault="True" UserSpecifiedDefault="False" PersistenceType="Fixed" />
+      <Version VersionNumber="4.20.4" InstallDir="$SIMO_DIR" ExeFilePath="" UserManualPath="" Platform="64" ProductType="V" Category="Custom" HelpFile="" IsDefault="True" UserSpecifiedDefault="False" PersistenceType="Fixed" />
       <Version VersionNumber="4.14.0" InstallDir="C:\Program Files\DNVGL\Simo V4.14-00\" ExeFilePath="" UserManualPath="" Platform="64" ProductType="V" Category="Sesam" HelpFile="" IsDefault="False" UserSpecifiedDefault="False" PersistenceType="Temp" />
     </Application>
     <Application Name="Wadam">
