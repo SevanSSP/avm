@@ -33,11 +33,11 @@ def test_exe_path(xml_file_path, xml_input):
     assert no_path is None
 
     simo_path = exe_path(appname='simo', appverxml=xml_file_path)
-    assert simo_path == r'"C:\Program Files\DNV\Riflex Simo V4.20-04\simo\bin\rsimo.exe"'
+    assert simo_path == rf'"{subs["SIMO_DIR"]}\simo\bin\rsimo.exe"'
     assert simo_path == exe_path(appname='simo', version='4.20.4', appverxml=xml_file_path)
 
     riflex_path = exe_path(appname='riflex', appverxml=xml_file_path)
-    assert riflex_path == r'"C:\Program Files\DNV\Riflex Simo V4.20-04\Riflex\bin\riflex.bat"'
+    assert riflex_path == rf'"{subs["RIFLEX_DIR"]}\Riflex\bin\riflex.bat"'
     assert riflex_path == exe_path(appname='riflex', version='4.20.4', appverxml=xml_file_path)
 
     with pytest.raises(FileNotFoundError):

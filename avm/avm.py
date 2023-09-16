@@ -59,9 +59,9 @@ def exe_path(appname, version=None, appverxml=None):
             return None
         else:
             if appname.lower() == 'simo':
-                path = f"{appversion.get('installdir')}simo\\bin\\rsimo.exe"
+                path = os.path.join(appversion.get('installdir'), 'simo', 'bin', 'rsimo.exe')
             elif appname.lower() == 'riflex':
-                path = f"{appversion.get('installdir')}Riflex\\bin\\riflex.bat"
+                path = os.path.join(appversion.get('installdir'), 'Riflex', 'bin', 'riflex.bat')
             else:
                 path = appversion.get('exepath')
             versionnumber = appversion.get('versionnumber')
@@ -72,9 +72,9 @@ def exe_path(appname, version=None, appverxml=None):
         for _, appversion in app.items():
             if appversion.get('default'):
                 if appname.lower() == 'simo':
-                    path = f"{appversion.get('installdir')}simo\\bin\\rsimo.exe"
+                    path = os.path.join(appversion.get('installdir'), 'simo', 'bin', 'rsimo.exe')
                 elif appname.lower() == 'riflex':
-                    path = f"{appversion.get('installdir')}Riflex\\bin\\riflex.bat"
+                    path = os.path.join(appversion.get('installdir'), 'Riflex', 'bin', 'riflex.bat')
                 else:
                     path = appversion.get('exepath')
                 versionnumber = appversion.get('versionnumber')

@@ -23,8 +23,14 @@ def xml_input(tmp_path_factory):
     for key in ['WADAM_EXE', 'WADAM_924_EXE']:
         open(subs[key], 'w').close()
 
-    for key, file in zip(['SIMO_DIR', 'RIFLEX_DIR'], ['simo\\bin\\rsimo.exe', 'riflex\\bin\\riflex.bat']):
-        open(subs[key]+file, 'w').close()
+    for key, sub_folders, file in zip(
+            ['SIMO_DIR', 'RIFLEX_DIR'], [['simo', 'bin'], ['riflex', 'bin']], ['rsimo.exe', 'riflex.bat']):
+        folder = subs[key]
+        for sub_folder in sub_folders:
+            folder = os.path.join(folder, sub_folder)
+            os.makedirs(folder)
+
+        open(os.path.join(folder, file), 'w').close()
 
     return tmp_path, subs
 
