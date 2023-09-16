@@ -33,11 +33,11 @@ def test_exe_path(xml_file_path, xml_input):
     assert no_path is None
 
     simo_path = exe_path(appname='simo', appverxml=xml_file_path)
-    assert simo_path == rf'"{subs["SIMO_DIR"]}\simo\bin\rsimo.exe"'
+    assert simo_path == f'"{os.path.join(subs["SIMO_DIR"], "simo", "bin", "rsimo.exe")}"'
     assert simo_path == exe_path(appname='simo', version='4.20.4', appverxml=xml_file_path)
 
     riflex_path = exe_path(appname='riflex', appverxml=xml_file_path)
-    assert riflex_path == rf'"{subs["RIFLEX_DIR"]}\Riflex\bin\riflex.bat"'
+    assert riflex_path == f'"{os.path.join(subs["RIFLEX_DIR"], "Riflex", "bin", "riflex.bat")}"'
     assert riflex_path == exe_path(appname='riflex', version='4.20.4', appverxml=xml_file_path)
 
     with pytest.raises(FileNotFoundError):
@@ -101,6 +101,8 @@ def test_latest_version(xml_file_path):
 
 
 def test_registered_applications(xml_file_path, faulty_xml_file_path, monkeypatch):
+    monkeypatch.setenv('APPDATA', 'not_here')
+
     reg_apps = registered_applications(appverxml=xml_file_path)
     assert len(reg_apps) == 13
 
@@ -111,7 +113,6 @@ def test_registered_applications(xml_file_path, faulty_xml_file_path, monkeypatc
         _ = registered_applications(appverxml=faulty_xml_file_path)
 
     with pytest.raises(FileNotFoundError):
-        monkeypatch.setenv('APPDATA', 'not_here')
         if not os.getenv('APPDATA'):
             raise ValueError('Monkeypatch failed')
         _ = registered_applications()
