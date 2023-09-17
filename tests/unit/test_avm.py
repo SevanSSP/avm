@@ -111,16 +111,12 @@ def test_registered_applications(xml_file_path, faulty_xml_file_path, monkeypatc
         _ = registered_applications(appverxml=faulty_xml_file_path)
 
     with pytest.raises(FileNotFoundError):
-        monkeypatch.setenv('APPDATA', 'not_here')
-        if not os.getenv('APPDATA'):
-            raise ValueError('Monkeypatch failed')
-        else:
-            print('outside', os.getenv('APPDATA'))
+        monkeypatch.setenv('appdata', 'not_here')
         _ = registered_applications()
 
     with pytest.raises(TypeError):
-        if os.getenv('APPDATA'):
-            monkeypatch.delenv('APPDATA')
+        if os.getenv('appdata'):
+            monkeypatch.delenv('appdata')
 
         _ = registered_applications()
 

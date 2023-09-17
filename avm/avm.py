@@ -75,7 +75,6 @@ def exe_path(appname, version=None, appverxml=None):
                     path = os.path.join(appversion.get('installdir'), 'simo', 'bin', 'rsimo.exe')
                 elif appname.lower() == 'riflex':
                     path = os.path.join(appversion.get('installdir'), 'Riflex', 'bin', 'riflex.bat')
-                    print(path)
                 else:
                     path = appversion.get('exepath')
                 versionnumber = appversion.get('versionnumber')
@@ -288,8 +287,7 @@ def registered_applications(appverxml=None):
     """
     # Try to locate the ApplicationVersions.xml in appdata, if it is not specified
     if appverxml is None:
-        print('inside', os.getenv('APPDATA'))
-        try:
+        if os.getenv('appdata'):
             if os.path.exists(
                     os.path.join(os.getenv('appdata'), 'DNVGL', 'ApplicationVersionManager',
                                  'ApplicationVersions.xml')
@@ -305,7 +303,7 @@ def registered_applications(appverxml=None):
                                          'ApplicationVersions.xml')
             else:
                 raise FileNotFoundError("Unable to automatically find 'ApplicationVersions.xml'")
-        except TypeError:
+        else:
             logger.error("No environmental variable called 'APPDATA'. Unable to find 'ApplicationVersions.xml'.")
             raise TypeError("No environmental variable called 'APPDATA'. Unable to find 'ApplicationVersions.xml'.")
 

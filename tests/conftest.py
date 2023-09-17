@@ -24,14 +24,13 @@ def xml_input(tmp_path_factory):
         open(subs[key], 'w').close()
 
     for key, sub_folders, file in zip(
-            ['SIMO_DIR', 'RIFLEX_DIR'], [['simo', 'bin'], ['riflex', 'bin']], ['rsimo.exe', 'riflex.bat']):
+            ['SIMO_DIR', 'RIFLEX_DIR'], [['simo', 'bin'], ['Riflex', 'bin']], ['rsimo.exe', 'riflex.bat']):
         folder = subs[key]
         for sub_folder in sub_folders:
             folder = os.path.join(folder, sub_folder)
             os.makedirs(folder)
 
         open(os.path.join(folder, file), 'w').close()
-        assert(os.path.exists(os.path.join(folder, file)))
 
     return tmp_path, subs
 
