@@ -101,8 +101,6 @@ def test_latest_version(xml_file_path):
 
 
 def test_registered_applications(xml_file_path, faulty_xml_file_path, monkeypatch):
-    monkeypatch.setenv('APPDATA', 'not_here')
-
     reg_apps = registered_applications(appverxml=xml_file_path)
     assert len(reg_apps) == 13
 
@@ -113,8 +111,11 @@ def test_registered_applications(xml_file_path, faulty_xml_file_path, monkeypatc
         _ = registered_applications(appverxml=faulty_xml_file_path)
 
     with pytest.raises(FileNotFoundError):
+        monkeypatch.setenv('APPDATA', 'not_here')
         if not os.getenv('APPDATA'):
             raise ValueError('Monkeypatch failed')
+        else:
+            print('outside', os.getenv('APPDATA'))
         _ = registered_applications()
 
     with pytest.raises(TypeError):

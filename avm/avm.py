@@ -287,6 +287,7 @@ def registered_applications(appverxml=None):
     """
     # Try to locate the ApplicationVersions.xml in appdata, if it is not specified
     if appverxml is None:
+        print('inside', os.getenv('APPDATA'))
         try:
             if os.path.exists(
                     os.path.join(os.getenv('appdata'), 'DNVGL', 'ApplicationVersionManager',
