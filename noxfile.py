@@ -54,5 +54,6 @@ def tests(session):
     session.install(".", "--no-deps")
 
     # test CLI
-    session.run("avm-list")
-    session.run("avm-list", "--all-versions")
+    xml_file_path = os.path.join(os.getcwd(), 'tests', 'files', 'app_ver_short.xml')
+    session.run("avm-list", fr'--xml-file={xml_file_path}')
+    session.run("avm-list", "--all-versions", fr'--xml-file={xml_file_path}')

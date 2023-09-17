@@ -6,6 +6,10 @@ authors = ["Per Voie, Sevan SSP", "Einar B. Glomnes, Sevan SSP <ebg@sevanssp.com
 license = "MIT"
 readme = "README.md"
 repository = "https://github.com/SevanSSP/avm/"
+packages = [{ include = "avm" },]
+include = [
+    "LICENSE"
+]
 
 [tool.poetry.scripts]
 avm-list = "avm.entry_points:list_applications"

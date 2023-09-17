@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DNVS>
+  <Global>
+    <AutoSetLatestAsDefault>false</AutoSetLatestAsDefault>
+    <AutoUpdateFromRegistry>false</AutoUpdateFromRegistry>
+    <LatestAsDefaultTypeSetting>V</LatestAsDefaultTypeSetting>
+    <Version>3.0</Version>
+  </Global>
+  <Applications>
+    <Application Name="Force">
+      <Version VersionNumber="9.5.3" InstallDir="C:\Program Files\DNVGL\Wadam V9.5-03\" ExeFilePath="C:\Program Files\DNVGL\Wadam V9.5-03\Bin\Force.exe" UserManualPath="" Platform="64" ProductType="V" Category="Component" HelpFile="" IsDefault="True" UserSpecifiedDefault="False" PersistenceType="Temp" />
+      <Version VersionNumber="9.2.4" InstallDir="C:\Program Files (x86)\DNVGL\Wadam V9.2-04\" ExeFilePath="C:\Program Files (x86)\DNVGL\Wadam V9.2-04\Bin\Force.exe" UserManualPath="" Platform="32" ProductType="V" Category="Component" HelpFile="" IsDefault="False" UserSpecifiedDefault="False" PersistenceType="Temp" />
+    </Application>
+    <Application Name="HydroD">
+      <Version VersionNumber="4.10.1" InstallDir="C:\Program Files (x86)\DNVGL\HydroD V4.10-01\" ExeFilePath="C:\Program Files (x86)\DNVGL\HydroD V4.10-01\Program\HydroD.exe" UserManualPath="" Platform="32" ProductType="V" Category="Sesam" HelpFile="" IsDefault="True" UserSpecifiedDefault="False" PersistenceType="Temp" />
+    </Application>
+    <Application Name="Mimosa">
+      <Version VersionNumber="6.3.10" InstallDir="C:\Program Files\DNVGL\Mimosa V6.3-10\" ExeFilePath="C:\Program Files\DNVGL\Mimosa V6.3-10\Bin\Mimosa.exe" UserManualPath="" Platform="64" ProductType="V" Category="Sesam" HelpFile="" IsDefault="True" UserSpecifiedDefault="False" PersistenceType="Temp" />
+      <Version VersionNumber="6.3.8" InstallDir="C:\Program Files (x86)\DNVGL\Mimosa V6.3-08\" ExeFilePath="C:\Program Files (x86)\DNVGL\Mimosa V6.3-08\Bin\Mimosa.exe" UserManualPath="" Platform="32" ProductType="V" Category="Sesam" HelpFile="" IsDefault="False" UserSpecifiedDefault="False" PersistenceType="Temp" />
+    </Application>
+    <Application Name="Postresp">
+      <Version VersionNumber="6.7.4" InstallDir="C:\Program Files\DNVGL\Postresp V6.7-04\" ExeFilePath="C:\Program Files\DNVGL\Postresp V6.7-04\Bin\Postresp.exe" UserManualPath="" Platform="64" ProductType="V" Category="Sesam" HelpFile="" IsDefault="True" UserSpecifiedDefault="False" PersistenceType="Temp" />
+    </Application>
+    <Application Name="Poten">
+      <Version VersionNumber="9.5.3" InstallDir="C:\Program Files\DNVGL\Wadam V9.5-03\" ExeFilePath="C:\Program Files\DNVGL\Wadam V9.5-03\Bin\Poten.exe" UserManualPath="" Platform="64" ProductType="V" Category="Component" HelpFile="" IsDefault="True" UserSpecifiedDefault="False" PersistenceType="Temp" />
+      <Version VersionNumber="9.2.4" InstallDir="C:\Program Files (x86)\DNVGL\Wadam V9.2-04\" ExeFilePath="C:\Program Files (x86)\DNVGL\Wadam V9.2-04\Bin\Poten.exe" UserManualPath="" Platform="32" ProductType="V" Category="Component" HelpFile="" IsDefault="False" UserSpecifiedDefault="False" PersistenceType="Temp" />
+    </Application>
+    <Application Name="Prefem">
+      <Version VersionNumber="7.1.7" InstallDir="C:\Program Files (x86)\DNVGL\Prefem V7.1-07\" ExeFilePath="C:\Program Files (x86)\DNVGL\Prefem V7.1-07\bin\prefem.EXE" UserManualPath="" Platform="32" ProductType="V" Category="Sesam" HelpFile="" IsDefault="True" UserSpecifiedDefault="False" PersistenceType="Temp" />
+    </Application>
+    <Application Name="Sima">
+      <Version VersionNumber="4.4.0" InstallDir="C:\Program Files\DNV\Sima V4.4-00\" ExeFilePath="C:\Program Files\DNV\Sima V4.4-00\Sima.exe" UserManualPath="" Platform="64" ProductType="V" Category="Sesam" HelpFile="" IsDefault="True" UserSpecifiedDefault="False" PersistenceType="Temp" />
+      <Version VersionNumber="4.2.0" InstallDir="C:\Program Files\DNV\Sima V4.2-00\" ExeFilePath="C:\Program Files\DNV\Sima V4.2-00\Sima.exe" UserManualPath="" Platform="64" ProductType="V" Category="Sesam" HelpFile="" IsDefault="False" UserSpecifiedDefault="False" PersistenceType="Temp" />
+      <Version VersionNumber="4.1.2" InstallDir="C:\Program Files\DNV\Sima V4.1-02\" ExeFilePath="C:\Program Files\DNV\Sima V4.1-02\Sima.exe" UserManualPath="" Platform="64" ProductType="V" Category="Sesam" HelpFile="" IsDefault="False" UserSpecifiedDefault="False" PersistenceType="Temp" />
+    </Application>
+    <Application Name="Simo">
+      <Version VersionNumber="4.14.0" InstallDir="C:\Program Files\DNVGL\Simo V4.14-00\" ExeFilePath="" UserManualPath="" Platform="64" ProductType="V" Category="Sesam" HelpFile="" IsDefault="True" UserSpecifiedDefault="False" PersistenceType="Temp" />
+    </Application>
+    <Application Name="Wadam">
+      <Version VersionNumber="9.5.1" InstallDir="C:\Program Files\DNVGL\Wadam V9.5-01\" ExeFilePath="C:\Program Files\DNVGL\Wadam V9.5-01\Bin\Wadam.exe" UserManualPath="" Platform="32" ProductType="V" Category="Sesam" HelpFile="" IsDefault="True" UserSpecifiedDefault="False" PersistenceType="Temp" />
+      <Version VersionNumber="9.4.1" InstallDir="C:\Program Files\DNVGL\Wadam V9.4-01\" ExeFilePath="C:\Program Files\DNVGL\Wadam V9.4-01\Bin\Wadam.exe" UserManualPath="" Platform="32" ProductType="V" Category="Sesam" HelpFile="" IsDefault="False" UserSpecifiedDefault="False" PersistenceType="Temp" />
+      <Version VersionNumber="9.4.9" InstallDir="C:\Program Files\DNVGL\Wadam V9.4-09\" ExeFilePath="C:\Program Files\DNVGL\Wadam V9.4-09\Bin\Wadam.exe" UserManualPath="" Platform="32" ProductType="V" Category="Sesam" HelpFile="" IsDefault="False" UserSpecifiedDefault="False" PersistenceType="Temp" />
+    </Application>
+    <Application Name="prewad">
+      <Version VersionNumber="6.2-08" InstallDir="C:\Program Files (x86)\DNVGL\Prewad V6.2-08" ExeFilePath="C:\Program Files (x86)\DNVGL\Prewad V6.2-08\prewad.EXE" UserManualPath="" Platform="32" ProductType="V" Category="Custom" HelpFile="" IsDefault="True" UserSpecifiedDefault="False" PersistenceType="Fixed" />
+    </Application>
+  </Applications>
+</DNVS>
