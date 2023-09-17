@@ -31,6 +31,7 @@ def xml_input(tmp_path_factory):
             os.makedirs(folder)
 
         open(os.path.join(folder, file), 'w').close()
+        assert(os.path.exists(os.path.join(folder, file)))
 
     return tmp_path, subs
 

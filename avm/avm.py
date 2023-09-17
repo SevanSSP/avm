@@ -75,6 +75,7 @@ def exe_path(appname, version=None, appverxml=None):
                     path = os.path.join(appversion.get('installdir'), 'simo', 'bin', 'rsimo.exe')
                 elif appname.lower() == 'riflex':
                     path = os.path.join(appversion.get('installdir'), 'Riflex', 'bin', 'riflex.bat')
+                    print(path)
                 else:
                     path = appversion.get('exepath')
                 versionnumber = appversion.get('versionnumber')
