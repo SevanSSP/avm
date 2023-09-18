@@ -9,21 +9,19 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python: [3.7, 3.8, 3.9]
+        python: ["3.8", "3.9", "3.10", "3.11"]
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Set up Python ${{ matrix.python }}
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v3
         with:
           python-version: ${{ matrix.python }}
 
       - name: Install Dependencies
         run: |
           pip install nox poetry
-          poetry config repositories.packagr ${{ secrets.PACKAGR_REPOSITORY_URL }}
-          poetry config http-basic.packagr ${{ secrets.PACKAGR_USERNAME }} ${{ secrets.PACKAGR_PASSWORD }}
 
       - name: Run tests with Nox
         run: nox -s lint tests
