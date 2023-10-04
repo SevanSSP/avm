@@ -1,5 +1,8 @@
 # AVM
-[![Build status](https://github.com/SevanSSP/avm/actions/workflows/build.yml/badge.svg)](https://github.com/SevanSSP/avm/actions/workflows/build.yml)
+
+![Build and test package](https://github.com/SevanSSP/avm/actions/workflows/test.yml/badge.svg?branch=master)
+![Publish Python package to Packagr](https://github.com/SevanSSP/avm/workflows/Publish%20Python%20package%20to%20Packagr/badge.svg)
+
 ## Description
 Python package for interacting with DNV GL Software's Application Version Manager.
 
