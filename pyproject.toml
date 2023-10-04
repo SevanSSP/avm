@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "avm"
-version = "1.2.0"
+version = "1.2.1"
 description = "Interact with DNV GL Software's Application Version Manager"
 authors = ["Per Voie, Sevan SSP", "Einar B. Glomnes, Sevan SSP <ebg@sevanssp.com>"]
 license = "MIT"
