@@ -163,6 +163,44 @@ def installation_path(appname, version=None, appverxml=None):
         return f'"{path}"'
 
 
+def default_version(appname, appverxml=None):
+    """
+    Get the default version of an application registered in Application Version Manager
+
+    Parameters
+    ----------
+    appname : str
+        Application name
+    appverxml : str, optional
+        XML file listing application-versions. By default the file in APPDATA is applied.
+
+    Returns
+    -------
+    str : f"{major}.{minor}.{patch}"
+        Default version of the application
+    """
+    # all registered applications
+    try:
+        appdata = registered_applications(appverxml=appverxml)
+    except FileNotFoundError:
+        logger.error("Failed to load application version data", exc_info=True)
+        raise FileNotFoundError("Failed to load application version data")
+
+    # get app data
+    app = appdata.get(appname.lower())
+    if app is None:
+        logger.warning(f"Application '{appname}' is not registered in Application Version Manager.", exc_info=True)
+        return None
+
+    # use default version
+    versionnumber = None
+    for _, appversion in app.items():
+        if appversion.get('default'):
+            versionnumber = appversion.get('versionnumber')
+
+    return versionnumber
+
+
 def all_versions(appname, appverxml=None):
     """
     Get all versions of an application registered in Application Version Manager
