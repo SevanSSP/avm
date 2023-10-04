@@ -5,7 +5,8 @@ import sys
 
 from xml.parsers.expat import ExpatError
 
-from avm import exe_path, installation_path, all_versions, latest_version, registered_applications, list_applications
+from avm import (exe_path, installation_path, all_versions, default_version,
+                 latest_version, registered_applications, list_applications)
 
 
 def test_exe_path(xml_file_path, xml_input):
@@ -78,6 +79,14 @@ def test_all_versions(xml_file_path):
 
     with pytest.raises(FileNotFoundError):
         _ = all_versions(appname='wadam', appverxml='not_here')
+
+
+def test_default_version(xml_file_path):
+    default_ver = default_version(appname='wadam', appverxml=xml_file_path)
+    assert default_ver == '9.5.3'
+
+    with pytest.raises(FileNotFoundError):
+        _ = default_version(appname='wadam', appverxml='not_here')
 
 
 def test_latest_version(xml_file_path):
