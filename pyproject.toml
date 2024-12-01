@@ -20,7 +20,7 @@ python = ">=3.9.1, < 4"
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.3.3"
 nox = "^2024.10.9"
-coverage = "^7.6.4"
+coverage = "^7.6.8"
 pytest-cov = "^6.0.0"
 
 [[tool.poetry.source]]
